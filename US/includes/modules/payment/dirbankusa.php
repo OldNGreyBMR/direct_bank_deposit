@@ -1,33 +1,19 @@
 <?php
-//
-// +----------------------------------------------------------------------+
-// |zen-cart Open Source E-commerce                                       |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2003 The zen-cart developers                           |
-// |                                                                      |   
-// | http://www.zen-cart.com/index.php                                    |   
-// |                                                                      |   
-// | Portions Copyright (c) 2003 osCommerce                               |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the GPL license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at the following url:           |
-// | http://www.zen-cart.com/license/2_0.txt.                             |
-// | If you did not receive a copy of the zen-cart license and are unable |
-// | to obtain it through the world-wide-web, please send a note to       |
-// | license@zen-cart.com so we can mail you a copy immediately.          |
-// +----------------------------------------------------------------------+
-// $Id: DIRBANKUSA.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
-// BMH (OldNGreY) 2023-02-05 
-//                2023-02-05    ln48 Illegal string offset 'id'  on line 50. added && isset($order->delivery['country']['id']) to end of line
-//                              class variables
+/*
+* Copyright (c) 2003-2023 The zen-cart developers
+* Portions Copyright (c) 2003 osCommerce 
+* * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+* $Id: DIRBANKUSA.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
+* @version $Id DIRBANKAUS V2.5.5 2023-02-19 BMH for zc158 PHP8.1 + PHP8.2
+*/
+//BMH 2023-02-19 reconfigured for PHP7.4
+declare(strict_types = 1);
 
 $id=isset($_SESSION['customer_id']);
 $ln=isset($_SESSION['customer_last_name']);
 
   class dirbankusa {
     
-    public $_check;
     public $code;       
     public $description;        // $description is a soft name for this payment method @var string 
     public $email_footer;       //$email_footer is the text to me placed in the footer of the email @var string
@@ -35,7 +21,8 @@ $ln=isset($_SESSION['customer_last_name']);
     public $order_status;       // $order_status is the order status to set after processing the payment
     public $sort_order;         // $sort_order is the order priority of this payment module when displayed
     public $title;              // $title is the displayed name for this order total method
-    
+    public $check;              //
+    public $_check;             //   
 
 // class constructor
     function __construct() {
@@ -43,7 +30,7 @@ $ln=isset($_SESSION['customer_last_name']);
 
       $this->code = 'dirbankusa';
       $this->title = MODULE_PAYMENT_DIRBANKUSA_TEXT_TITLE;
-      $this->description = MODULE_PAYMENT_DIRBANKUSA_TEXT_DESCRIPTION;
+      $this->description = MODULE_PAYMENT_DIRBANKUSA_DESCRIPTION;
       $this->email_footer = defined('MODULE_PAYMENT_DIRBANKUSA_TEXT_EMAIL_FOOTER');
       $this->sort_order = defined('MODULE_PAYMENT_DIRBANKUSA_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKUSA_SORT_ORDER : NULL;
       $this->enabled = (defined('MODULE_PAYMENT_DIRBANKUSA_STATUS') && MODULE_PAYMENT_DIRBANKUSA_STATUS  == 'True') ;
@@ -122,6 +109,7 @@ if (!defined('MODULE_PAYMENT_DIRBANKUSA_ORDER_STATUS_ID')) {define('MODULE_PAYME
 
     function check() {
       global $db;
+      global $_check;
       if (!isset($this->_check)) {
         $check_query = $db->Execute("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_PAYMENT_DIRBANKUSA_STATUS'");
         $this->_check = $check_query->RecordCount();

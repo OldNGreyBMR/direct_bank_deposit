@@ -5,11 +5,12 @@
 // BMH 2022-01-24 defines line 23; 25; 56
 // BMH Undefined index: customer_id @
 // BMH zc158 lang file
+// BMH 2023-02-02 duplicate constants defined
 //
 
 $define = [
-    'MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE' => 'Direct Bank Aus',
-    'MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION' => 'Direct Bank Transfer',
+    //'MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE' => 'Direct Bank Aus',
+    //'MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION' => 'Direct Bank Transfer',
     'EMAIL_TEXT_NO_DELIVERY' => '<p>No Delivery, see below:', 
     'MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE' => 'Direct-Bank-Deposit - Australian',
     'MODULE_PAYMENT_DIRBANKAUS_ADDRESS' => '',
