@@ -1,10 +1,14 @@
 # direct_bank_deposit
 
- Direct Bank Deposit Australia and USA files only
+ Direct Bank Deposit Australia, New Zealand and USA files only
  -----------------------------------------
  
 Updated from:
 Direct Bank Deposit v 1.5.3 for Zen Cart 1.3.8a - v 1.5.4
+
+2023-03-26
+NZ updated to match AUS changes
+AUS removed Cheques, money orders, swift code
 
 2023-02-15
 Modified USA to match AUS changes
@@ -27,7 +31,6 @@ This is a simple module for those that want to provide a bank transfer payment o
 The Australian version of this module allows you to configure the following in the admin:
 ~ BSB Number
 ~ Bank Name
-~ Swift Code
 ~ Account Number
 ~Address
 
