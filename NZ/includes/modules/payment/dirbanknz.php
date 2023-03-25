@@ -4,14 +4,15 @@
 * Portions Copyright (c) 2003 osCommerce                               |
 * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKNZ.php 1970 2010-6-22 06:57:21Z Nigel Thomson - adjusted from Crystal Jones code $ modify from Auzbank of OZcommerce module by birdbrain
-* @version $Id DIRBANKAUS 2023-02-19 BMH for zc158 PHP8.1 and PHP8.2
+* @version v1.5.5.01 $Id DIRBANKAUS 2023-02-19 OldNGrey (BMH) for zc157d and zc158 with PHP7.4 or PHP8.1 or PHP8.2 (NOT for PHP7.3)
+// 2023-03-25 ln36 corrected
 */
 //
 
-declare(strict_types = 1);
+//declare(strict_types = 1);
 
-$id=isset($_SESSION['customer_id']);            
-$ln=ISSET($_SESSION['customer_last_name']);     
+$id=isset($_SESSION['customer_id']);
+$ln=ISSET($_SESSION['customer_last_name']);
 
   class dirbanknz {
 
@@ -32,13 +33,13 @@ $ln=ISSET($_SESSION['customer_last_name']);
 
       $this->code = 'dirbanknz';
       $this->title = MODULE_PAYMENT_DIRBANKNZ_TEXT_TITLE;
-      $this->description = MODULE_PAYMENT_DIRBANKNZ_DESCRIPTION;
+      $this->description = MODULE_PAYMENT_DIRBANKNZ_TEXT_DESCRIPTION;
       $this->email_footer = defined('MODULE_PAYMENT_DIRBANKNZ_TEXT_EMAIL_FOOTER');
       $this->sort_order = defined('MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER : null;
       $this->enabled = (defined('MODULE_PAYMENT_DIRBANKNZ_STATUS') && MODULE_PAYMENT_DIRBANKNZ_STATUS == 'True');
 
       if (null === $this->sort_order) return false;
-      
+
       if ((int)MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID > 0) {
         $this->order_status = MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID;
       }
@@ -101,6 +102,9 @@ $ln=ISSET($_SESSION['customer_last_name']);
       return false;
     }
 
+    function after_order_create($order_id) {
+      $this->email_footer = sprintf(MODULE_PAYMENT_DIRBANKNZ_TEXT_EMAIL_FOOTER, $order_id);
+    }
     function after_process() {
       return false;
     }
