@@ -1,50 +1,53 @@
 <?php
 /*
-* Copyright (c) 2003-2023 The zen-cart developers                           |
-* Portions Copyright (c) 2003 osCommerce                               |
+* Copyright (c) 2003-2024 The zen-cart developers 
+* Portions Copyright (c) 2003 osCommerce 
 * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKNZ.php 1970 2010-6-22 06:57:21Z Nigel Thomson - adjusted from Crystal Jones code $ modify from Auzbank of OZcommerce module by birdbrain
-* @version v1.5.5.01 $Id DIRBANKAUS 2023-02-19 OldNGrey (BMH) for zc157d and zc158 with PHP7.4 or PHP8.1 or PHP8.2 (NOT for PHP7.3)
-// 2023-03-25 ln36 corrected
+* @version $Id DIRBANKNZ V158 2024-02-02 BMH for zc158 zc158a PHP8.2 PHP8.3
 */
-//
 
-//declare(strict_types = 1);
+declare(strict_types = 1);
 
-$id=isset($_SESSION['customer_id']);
-$ln=ISSET($_SESSION['customer_last_name']);
+$id=isset($_SESSION['customer_id']);    // BMH @$id=$_SESSION['customer_id'];
+$ln=isset($_SESSION['customer_last_name']); // BMH @$ln=$_SESSION['customer_last_name'];
 
-  class dirbanknz {
-
+class dirbanknz extends base
+{
     public $code;
-    public $description;        // $description is a soft name for this payment method @var string
-    public $email_footer;       //$email_footer is the text to me placed in the footer of the email @var string
-    public $enabled;            //
-    public $order_status;       // $order_status is the order status to set after processing the payment
-    public $sort_order;         // $sort_order is the order priority of this payment module when displayed
-    public $title;              // $title is the displayed name for this order total method
-    public $check;              //
-    public $_check;             //
+    public $description;                // $description is a soft name for this payment method @var string
+    public $email_footer;               // $email_footer is the text to me placed in the footer of the email @var string
+    public $enabled;                    // $enabled determines whether this module shows or not... in catalog.
+    public $moduleVersion = '1.5.8';    // $moduleVersion is the plugin version number
+    public $order_status;               // $order_status is the order status to set after processing the payment
+    public $sort_order;                 // $sort_order is the order priority of this payment module when displayed
+    public $title;                      // $title is the displayed name for this order total method
+    public $check;                      //
+    protected $_check;                     //
 
 
 // class constructor
-    function __construct() {
-      global $order;
+    public function __construct() {
+        global $order;
 
-      $this->code = 'dirbanknz';
-      $this->title = MODULE_PAYMENT_DIRBANKNZ_TEXT_TITLE;
-      $this->description = MODULE_PAYMENT_DIRBANKNZ_TEXT_DESCRIPTION;
-      $this->email_footer = defined('MODULE_PAYMENT_DIRBANKNZ_TEXT_EMAIL_FOOTER');
-      $this->sort_order = defined('MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER : null;
-      $this->enabled = (defined('MODULE_PAYMENT_DIRBANKNZ_STATUS') && MODULE_PAYMENT_DIRBANKNZ_STATUS == 'True');
+        $this->code = 'dirbanknz';
+        $this->enabled = (defined('MODULE_PAYMENT_DIRBANKNZ_STATUS') && MODULE_PAYMENT_DIRBANKNZ_STATUS == 'True') ;
+        $this->sort_order = defined('MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER : null;
+        $this->title = MODULE_PAYMENT_DIRBANKNZ_TEXT_TITLE;     // Payment module title in Catalog
+        if (IS_ADMIN_FLAG === true) {
+            $this->description = '<strong>' . MODULE_PAYMENT_DIRBANKNZ_TEXT_TITLE . ' ' . $this->moduleVersion . ' </strong>';
+            $this->description .= '<br><br>' . MODULE_PAYMENT_DIRBANKNZ_TEXT_DESCRIPTION;
+        }
 
-      if (null === $this->sort_order) return false;
+        $this->email_footer = defined('MODULE_PAYMENT_DIRBANKNZ_TEXT_EMAIL_FOOTER');
 
-      if ((int)MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID > 0) {
-        $this->order_status = MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID;
-      }
+        if (null === $this->sort_order) return false;
 
-      if (is_object($order)) $this->update_status();
+        if ((int)MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID > 0) {
+            $this->order_status = MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID;
+        }
+
+        if (is_object($order)) $this->update_status();
     }
 
 // class methods
@@ -113,34 +116,52 @@ $ln=ISSET($_SESSION['customer_last_name']);
       return false;
     }
 
-    function check() {
-      global $db;
-      global $_check;
-      if (!isset($this->_check)) {
-        $check_query = $db->Execute("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_PAYMENT_DIRBANKNZ_STATUS'");
-        $this->_check = $check_query->RecordCount();
-      }
+    public function check()
+    {
+        global $db;
+      //global $_check;
+        if (!isset($this->_check)) {
+            $check_query = $db->Execute("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_PAYMENT_DIRBANKNZ_STATUS'");
+            $this->_check = $check_query->RecordCount();
+        }
+    if ($this->_check > 0) $this->install(); // install any missing keys
       return $this->_check;
     }
 
-    function install() {
-      global $db;
-     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Direct Bank Deposit Module', 'MODULE_PAYMENT_DIRBANKNZ_STATUS', 'True', 'Do you want to accept NZ Bank Deposit payments?', '6', '1', 'zen_cfg_select_option(array(\'True\', \'False\'), ', now())");
-	 $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Payment Zone', 'MODULE_PAYMENT_DIRBANKNZ_ZONE', '0', 'If a zone is selected, only enable this payment method for that zone.', '6', '2', 'zen_get_zone_class_title', 'zen_cfg_pull_down_zone_classes(', now())");
-     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    public function install()
+    {
+        global $db;
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_STATUS')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Direct Bank Deposit Module', 'MODULE_PAYMENT_DIRBANKNZ_STATUS', 'True', 'Do you want to accept NZ Bank Deposit payments?', '6', '1', 'zen_cfg_select_option(array(\'True\', \'False\'), ', now())");
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_ZONE')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Payment Zone', 'MODULE_PAYMENT_DIRBANKNZ_ZONE', '0', 'If a zone is selected, only enable this payment method for that zone.', '6', '2', 'zen_get_zone_class_title', 'zen_cfg_pull_down_zone_classes(', now())");
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_ACCNUM')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account No.', 'MODULE_PAYMENT_DIRBANKNZ_ACCNUM', '12345678', 'Bank Account No.', '6', '1', now());");
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_ACCNAM')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account Name', 'MODULE_PAYMENT_DIRBANKNZ_ACCNAM', 'Hone Bloggs', 'Bank Account Name', '6', '1', now());");
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_BANKNAM')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Name', 'MODULE_PAYMENT_DIRBANKNZ_BANKNAM', 'The Bank', 'Bank Name', '6', '1', now());");
+        if (!defined('MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID')) $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Order Status', 'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID', '0', 'Set the status of orders made with this payment module to this value', '6', '0', 'zen_cfg_pull_down_order_statuses(', 'zen_get_order_status_name', now())");
 
-     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account No.', 'MODULE_PAYMENT_DIRBANKNZ_ACCNUM', '12345678', 'Bank Account No.', '6', '1', now());");
-     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account Name', 'MODULE_PAYMENT_DIRBANKNZ_ACCNAM', 'Hone Bloggs', 'Bank Account Name', '6', '1', now());");
-     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Name', 'MODULE_PAYMENT_DIRBANKNZ_BANKNAM', 'The Bank', 'Bank Name', '6', '1', now());");
-     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Order Status', 'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID', '0', 'Set the status of orders made with this payment module to this value', '6', '0', 'zen_cfg_pull_down_order_statuses(', 'zen_get_order_status_name', now())");
+        $db->Execute('DELETE FROM ' . TABLE_CONFIGURATION . " WHERE configuration_key='MODULE_PAYMENT_DIRBANKNZ_ADDRESS'");  // remove redundant fields
+        $db->Execute('DELETE FROM ' . TABLE_CONFIGURATION . " WHERE configuration_key='MODULE_PAYMENT_DIRBANKNZ_PAYABLE'");  // from previous installs
+
    }
 
-    function remove() {
-      global $db;
-      $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+    public function remove()
+    {
+        global $db;
+        $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
     }
 
-    function keys() {
-        return array('MODULE_PAYMENT_DIRBANKNZ_STATUS', 'MODULE_PAYMENT_DIRBANKNZ_ZONE', 'MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER', 'MODULE_PAYMENT_DIRBANKNZ_ACCNUM', 'MODULE_PAYMENT_DIRBANKNZ_ACCNAM',  'MODULE_PAYMENT_DIRBANKNZ_BANKNAM', 'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID', 'MODULE_PAYMENT_DIRBANKNZ_ADDRESS', 'MODULE_PAYMENT_DIRBANKNZ_PAYABLE');
+    public function keys()
+    {
+        return array(
+            'MODULE_PAYMENT_DIRBANKNZ_STATUS',
+            'MODULE_PAYMENT_DIRBANKNZ_ZONE',
+            'MODULE_PAYMENT_DIRBANKNZ_SORT_ORDER',
+            'MODULE_PAYMENT_DIRBANKNZ_ACCNUM',
+            'MODULE_PAYMENT_DIRBANKNZ_ACCNAM',
+            'MODULE_PAYMENT_DIRBANKNZ_BANKNAM',
+            'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID',
+           // 'MODULE_PAYMENT_DIRBANKNZ_ADDRESS',
+           // 'MODULE_PAYMENT_DIRBANKNZ_PAYABLE',
+        );
     }
   }
