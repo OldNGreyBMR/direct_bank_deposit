@@ -5,7 +5,7 @@ to be read in conjunction with the main read me file
  -----------------------------------------
  v1.5.8 2024-02-02
  removed reference to Cheques and Money Orders. and Swift codes
- 
+ does not have language files for Zen Cart v1.5.7 and earlier
  
  Updated from:
  Direct Bank Deposit v 1.5.3 for Zen Cart 1.3.8a - v 1.5.4
