@@ -1,7 +1,7 @@
 <?php
 /*
-* Copyright (c) 2003-2023 The zen-cart developers                           |
-* Portions Copyright (c) 2003 osCommerce                               |
+* Copyright (c) 2003-2024 The zen-cart developers
+* Portions Copyright (c) 2003 osCommerce
 * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKNZ.php 1970 2010-6-22 06:57:21Z Nigel Thomson - adjusted from Crystal Jones code $ modify from Auzbank of OZcommerce module by birdbrain
 * @version $Id DIRBANKAUS V158 2024-02-02 BMH for zc158 zc158a PHP8.2 PHP8.3
