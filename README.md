@@ -8,7 +8,7 @@ ZA
 General notes
 -------------
 Updated for Zen Cart 158+ with improved language files
-cleanly installs and uninstalls
+cleanly installs and uninstalls;
 removed references to addresses 
 
 Direct Bank Deposit AUS v1.5.8 for Zen Cart 1.5.8 - 1.5.8a PHP8.2 PHP8.3
