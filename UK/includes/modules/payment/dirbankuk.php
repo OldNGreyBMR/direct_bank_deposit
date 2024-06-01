@@ -52,7 +52,7 @@ class dirbankuk {
 
       $this->code = 'dirbankuk';
       $this->title = MODULE_PAYMENT_DIRBANKUK_TEXT_TITLE;
-      $this->description = 'V' . VERSION_UK . ' ' . MODULE_PAYMENT_DIRBANKUK_TEXT_DESCRIPTION; // show version in admin panel
+      $this->description = 'V' . VERSION_UK . ' ' . defined('MODULE_PAYMENT_DIRBANKUK_TEXT_DESCRIPTION'); // show version in admin panel
       $this->email_footer = defined('MODULE_PAYMENT_DIRBANKUK_TEXT_EMAIL_FOOTER');
       $this->sort_order = defined('MODULE_PAYMENT_DIRBANKUK_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKUK_SORT_ORDER : null;
       $this->enabled = (defined('MODULE_PAYMENT_DIRBANKUK_STATUS') && MODULE_PAYMENT_DIRBANKUK_STATUS == 'True');
