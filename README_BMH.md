@@ -1,6 +1,7 @@
 Direct Bank Deposit V2.0.0  for zc v158 zc158a zc200 and for PHP 8.2 and 8.3 
+for AUS, CA, NZ, UK, USA, ZA
 
-2024-01-29
+2024-06-01.
 
 Please read the install Instructions further down the page
 
@@ -12,13 +13,35 @@ The Australian version of this module allows you to configure the following in t
 ~ Bank Name
 ~ Address
 
-The USA version of this module allows you to configure the following in the admin:
-~ Account Name
-~ Routing Number
-~ Bank Name
-~ Account Number
+The CA version of this module allows you to configure the following in the admin:
 
 The NZ version of this module allows you to configure the following in the admin:
 ~ Account Name
 ~ Bank Name
 ~ Account Number
+
+The UK version of this module allows you to configure the following in the admin:
+~ Account Name
+~ Sort Code:     
+~ Account Number:  
+~ Bank Name:     
+~ Reference:     
+~ Swift/BIC Code:
+~ IBAN Number:  
+
+The USA version of this module allows you to configure the following in the admin:
+~ Account Number
+~ Routing Number
+~ Account Name
+~ Bank Name
+
+The NZ version of this module allows you to configure the following in the admin:
+~ Account Name
+~ Bank Name
+~ Account Number
+
+The ZA version of this module allows you to configure the following in the admin:
+~ Account Name
+~ Account Number
+~ Bank Name
+~ Branch Code
