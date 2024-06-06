@@ -29,7 +29,7 @@ if (defined('MODULE_PAYMENT_DIRBANKUK_STATUS')) {
     '</pre><p>Thanks for your order which will ship immediately <br>once we receive payment in the above account.' 
   ;
 
-  $define['MODULE_PAYMENT_DIRBANKAUS_TEXT_EMAIL_FOOTER'] = "Please use the following details to transfer your total order value:\n\n" .
+  $define['MODULE_PAYMENT_DIRBANKUK_TEXT_EMAIL_FOOTER'] = "Please use the following details to transfer your total order value:\n\n" .
     "\nAccount No.:  " . MODULE_PAYMENT_DIRBANKUK_ACCNUM .
     "\nSort Code:" . MODULE_PAYMENT_DIRBANKUK_SORTCODE .
     "\nAccount Name: " . MODULE_PAYMENT_DIRBANKUK_ACCNAM .
@@ -40,7 +40,7 @@ if (defined('MODULE_PAYMENT_DIRBANKUK_STATUS')) {
     "\n\nThanks for your order which will ship immediately once we receive payment in the above account.\n"
   ;
 
-  $define['MODULE_PAYMENT_DIRBANKAUS_HTML_EMAIL_FOOTER'] = '<br>Please use the following details to transfer your total order value:<br><pre>' .
+  $define['MODULE_PAYMENT_DIRBANKUK_HTML_EMAIL_FOOTER'] = '<br>Please use the following details to transfer your total order value:<br><pre>' .
   "\nAccount No.:   " . MODULE_PAYMENT_DIRBANKUK_ACCNUM .
   "\nSort Code:" . MODULE_PAYMENT_DIRBANKUK_SORTCODE . 
   "\nAccount Name:  " . MODULE_PAYMENT_DIRBANKUK_ACCNAM . 
