@@ -21,7 +21,7 @@ if (!defined('MODULE_PAYMENT_DIRBANKUK_TEXT_TITLE')) {
   if (file_exists($new_langfile)) {
     global $languageLoader;
     $languageLoader->loadExtraLanguageFiles(DIR_FS_CATALOG . DIR_WS_LANGUAGES, $_SESSION['language'], $folder . 'lang.' . $filename);
-    echo '<br> ln30 $languageLoader = ' . DIR_FS_CATALOG . DIR_WS_LANGUAGES . $_SESSION['language'] . $folder . 'lang.' . $filename; //BMH DEBUG
+   // echo '<br> ln30 $languageLoader = ' . DIR_FS_CATALOG . DIR_WS_LANGUAGES . $_SESSION['language'] . $folder . 'lang.' . $filename; //BMH DEBUG
   } else if (file_exists($old_langfile)) {
     $tpl_old_langfile = DIR_WS_LANGUAGES . $_SESSION['language'] . $folder . $template_dir . '/' . $filename;
     if (file_exists($tpl_old_langfile)) {
