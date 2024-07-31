@@ -5,10 +5,11 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * Based on DIRBANKUK.php 1106 2012-11-10 22:05:35Z Nigel Thomson $ modify from Auzbank of OZcommerce module by birdbrain
  * @version $Id V2.0.0 DIRBANKUK 2024-05-31  BMH (OldNGrey) for zc158 zc158a zc200 PHP8.2 PHP8.3
+ *               V2.0.01 DIRBANKUK 2024-07-31 ln60 defined MODULE_PAYMENT_DIRBANKUK_TEXT_DESCRIPTION
  */
 
 declare(strict_types=1);
-if (!defined('VERSION_UK')) {  define('VERSION_UK', '2.0.0');}
+if (!defined('VERSION_UK')) {  define('VERSION_UK', '2.0.1');}
 
 // check which zc version and preload language files if required. Language files may be required if this module is called directly eg from edit _orders
 
