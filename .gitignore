@@ -4,3 +4,5 @@
 \nppBackup
 dev-*
 *.php2
+*.zip
+*.log
