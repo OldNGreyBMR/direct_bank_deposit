@@ -37,6 +37,7 @@ Modified USA to match AUS changes
  Released under the GNU General Public License
  
 ================================================================
+
 Please read the install Instructions further down the page
 
 This is a simple module for those that want to provide a bank transfer payment option. Customers can choose to pay by direct money transfer into your Bank Account.
@@ -48,6 +49,7 @@ The Australian version of this module allows you to configure the following in t
 ~Address
 
 ===========================
+
 TO INSTALL
 
 **FOR ZC V2.1.0**
