@@ -1,6 +1,10 @@
 # direct_bank_deposit
 
  Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
+------------------------------------------
+2024-10-19 V2.1.0
+For Zen Cart 1.5.8 to v2.1.0 and PHP 8.1 to 8.3
+zc_plugins folder installer created for each country
  -----------------------------------------
 2024-06-1013 V2.0.1 DRAFT
 For Zen Cart 1.5.8 to V2.0.0 and PHP 8.1 to 8.3
@@ -45,9 +49,16 @@ The Australian version of this module allows you to configure the following in t
 ===========================
 TO INSTALL
 ===========================
-Copy the includes folder for your country to the root of your Zen Cart store.
+__FOR ZC V2.1.0 __ 
+1. copy the zc_plugins folder to the root of your Zen Cart store
+2. use Admin > Mudules > Plugin Manager to install the plugin 
+3. Goto step B below
 
-Go to Admin --> Modules --> Payment and click on the module and add your details
+__For other versions before zc V2.1.0__
+
+A. Copy the includes folder for your country to the root of your Zen Cart store.
+
+B. Go to Admin --> Modules --> Payment and click on the module and add your details
 
 When populated the bank details are displayed in the admin module. 
 The field "Reference" displays "--$s". This is a payment reference code that displays the customer id 
