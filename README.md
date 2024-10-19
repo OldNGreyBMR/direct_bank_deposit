@@ -30,10 +30,10 @@ Modified USA to match AUS changes
   Also added an address field. 
   Added modified "Store Pickup" plugin. Addresses only appear in confirmation email
  )
-
-(Modified from Ausbank for OS Commerce)
-Original Mod Released 20/06/06
-Released under the GNU General Public License
+ 
+ (Modified from Ausbank for OS Commerce)
+ Original Mod Released 20/06/06
+ Released under the GNU General Public License
 ================================================================
 
 Please read the install Instructions further down the page
