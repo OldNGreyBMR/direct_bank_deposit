@@ -49,13 +49,15 @@ The Australian version of this module allows you to configure the following in t
 
 ===========================
 TO INSTALL
-===========================
-__FOR ZC V2.1.0 __ 
+
+**FOR ZC V2.1.0**
+
 1. copy the zc_plugins folder to the root of your Zen Cart store
 2. use Admin > Mudules > Plugin Manager to install the plugin 
 3. Goto step B below
 
-__For other versions before zc V2.1.0__
+**For other versions before zc V2.1.0**
+
 A. Copy the includes folder for your country to the root of your Zen Cart store.
 B. Go to Admin --> Modules --> Payment and click on the module and add your details
 
