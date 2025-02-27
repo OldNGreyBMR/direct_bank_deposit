@@ -1,17 +1,17 @@
 <?php
 /*
-* Copyright (c) 2003-2023 The zen-cart developers
+* Copyright (c) 2003-2025 The zen-cart developers
 * Portions Copyright (c) 2003 osCommerce
 * * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKCA.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
-* @version $Id V2.0.1 DIRBANKCA 2024-04-13  BMH (OldNGrey) for zc158 zc158a zc200 PHP8.2 PHP8.3
+* @version $Id V2.1.1 DIRBANKCA 2025-02-26  BMH (OldNGrey) for zc158a to zc210 and PHP8.2 to PHP8.4
 */
 
 declare(strict_types = 1);
-if (!defined('VERSION_CA')) { define('VERSION_CA', '2.0.1');}
+if (!defined('VERSION_CA')) { define('VERSION_CA', '2.1.1');}
 
 // check which zc version and preload language files if required. Language files may be required if this module is called directly eg from edit _orders
-
+/*
 if (!defined('MODULE_PAYMENT_DIRBANKCA_TEXT_TITLE')) {
     $filename = "dirbankca.php";
     $folder = "/modules/payment/";  // end with slash
@@ -21,6 +21,7 @@ if (!defined('MODULE_PAYMENT_DIRBANKCA_TEXT_TITLE')) {
     if (file_exists($new_langfile)) {
         global $languageLoader;
         $languageLoader->loadExtraLanguageFiles(DIR_FS_CATALOG . DIR_WS_LANGUAGES,  $_SESSION['language'], $folder . 'lang.'.$filename);
+
     } else if (file_exists($old_langfile)) {
         $tpl_old_langfile = DIR_WS_LANGUAGES . $_SESSION['language'] . $folder .  $template_dir . '/' . $filename;
         if (file_exists($tpl_old_langfile)) {
@@ -29,12 +30,12 @@ if (!defined('MODULE_PAYMENT_DIRBANKCA_TEXT_TITLE')) {
         include_once ($old_langfile);
     }
 }
+*/
 
 $id=isset($_SESSION['customer_id']);
 $ln=isset($_SESSION['customer_last_name']);
 
   class dirbankca {
-
     public $code;
     public $description;        // $description is a soft name for this payment method @var string
     public $email_footer;       //$email_footer is the text to me placed in the footer of the email @var string
@@ -51,16 +52,17 @@ $ln=isset($_SESSION['customer_last_name']);
 
       $this->code = 'dirbankca';
       $this->title = MODULE_PAYMENT_DIRBANKCA_TEXT_TITLE;
-      $this->description = 'V' . VERSION_CA . ' ' . MODULE_PAYMENT_DIRBANKCA_DESCRIPTION; // show version in admin panel
-      $this->email_footer = defined('MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER');
-      $this->sort_order = defined('MODULE_PAYMENT_DIRBANKCA_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKCA_SORT_ORDER : NULL;
-      $this->enabled = (defined('MODULE_PAYMENT_DIRBANKCA_STATUS') && MODULE_PAYMENT_DIRBANKCA_STATUS  == 'True') ;
+      $this->description = 'V' . VERSION_CA . ' ' . MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION; // show version in admin panel
+      $this->email_footer = MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER;
+      $this->sort_order = defined('MODULE_PAYMENT_DIRBANKCA_SORT_ORDER') ? ((int)MODULE_PAYMENT_DIRBANKCA_SORT_ORDER) : null;
+      $this->enabled = defined('MODULE_PAYMENT_DIRBANKCA_STATUS') && (MODULE_PAYMENT_DIRBANKCA_STATUS  == 'True') ;
 
-if (!defined('MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID')) {define('MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID', '');}
 
-      if ((int)MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID > 0) {
-        $this->order_status = MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID ;
-      }
+        if (null === $this->sort_order)   return;
+
+        if ((int)MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID > 0) {
+            $this->order_status = MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID ;
+        }
 
       if (is_object($order)) $this->update_status();
     }
@@ -139,11 +141,16 @@ if (!defined('MODULE_PAYMENT_DIRBANKCA_ORDER_STATUS_ID')) {define('MODULE_PAYMEN
     }
 
     function install() {
-      global $db;
+      global $db, $messageStack;
+      if (defined('MODULE_PAYMENT_DIRBANKCA_STATUS')) {
+        $messageStack->add_session('DirBankCA module already installed.', 'error');
+        zen_redirect(zen_href_link(FILENAME_MODULES, 'set=payment&module=dirbankca', 'NONSSL'));
+        return 'failed';
+      }
      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
         configuration_value, configuration_description, configuration_group_id, sort_order, set_function,
         date_added) values ('Enable Direct Bank Deposit Module', 'MODULE_PAYMENT_DIRBANKCA_STATUS', 'True',
-        'Do you want to accept CA Bank Deposit payments?', '6', '1', 'zen_cfg_select_option(array(\'True\',
+        'Do you want to accept Canadian Bank Deposit payments?', '6', '1', 'zen_cfg_select_option(array(\'True\',
         \'False\'), ', now())");
 
     $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
