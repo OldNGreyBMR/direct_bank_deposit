@@ -1,6 +1,6 @@
 # direct_bank_deposit
 
-##Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
+## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
  
 2025-02-24 V2.1.1
 For Zen Cart 1.5.8a to v2.1.0 and PHP 8.1 to 8.4
