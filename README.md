@@ -2,8 +2,9 @@
 
  Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
 ------------------------------------------
+
 2025-02-24 V2.1.1
-For Zen Cart 1.5.8 to v2.1.0 and PHP 8.1 to 8.4
+For Zen Cart 1.5.8a to v2.1.0 and PHP 8.1 to 8.4
 Remove zc_plugins folder installer created for each country as payment modules not compatible ZC plugins schema
  -----------------------------------------
  2024-10-19 V2.1.0
@@ -55,7 +56,7 @@ The Australian version of this module allows you to configure the following in t
 
 TO INSTALL
 
-**FOR ZC V1.5.8 to V2.1.0
+**FOR ZC V1.5.8a to V2.1.0
 
 A. Copy the includes folder for your country to the root of your Zen Cart store.
 B. Go to Admin --> Modules --> Payment and click on the module and add your details
