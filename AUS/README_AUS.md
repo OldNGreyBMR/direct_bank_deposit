@@ -3,6 +3,11 @@ to be read in conjunction with the main read me file
 
 Direct Bank Deposit Australia files only
 -----------------------------------------
+2025-12-20 V2.1.2
+For For Zen Cart v2.2.0 and PHP 8.3 to 8.4
+Create zc_plugins folder installer for AU
+
+**
 v2.1.1 2025-02-27
 suitable for Zen Cart v1.5.8a to v2.1.0
 
@@ -38,5 +43,6 @@ The Australian version of this module allows you to configure the following in t
 TO INSTALL
 ===========================
 Copy the includes folder for your country to the root of your Zen Cart store.
+
 
 Go to Admin --> Modules --> Payment and click on the module and add your details
