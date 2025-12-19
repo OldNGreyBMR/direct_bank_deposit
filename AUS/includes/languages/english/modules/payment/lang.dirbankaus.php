@@ -1,38 +1,58 @@
 <?php
+// Copyright (c) 2024-2025 The zen-cart developers
 // DIRBANKAUS based on  $Id: DIRBANKAUS.php 1970 2009-11-24 06:57:21Z CRYSTAL JONES $
-// BMR (OldNGrey) v158 2024-02-02 lang.dirbankaus.php for zc158
+// BMH (OldNGrey) v2.1.1 2025-02-26 lang.dirbankaus.php for zc158a to zc210 PHP8.2 to PHP8.4
+//
+
+$define = [
+    'MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION' => 'Direct Bank Transfer AU',
+    'EMAIL_TEXT_NO_DELIVERY' => '<p>No Delivery, see below:',
+    'MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE' => 'Direct-Bank-Deposit - Australian',
+];
 
 $ln=$_SESSION['customer_last_name'] ?? '';    // required for inclusion below
 $id=$_SESSION['customer_id'] ?? '';           // required for inclusion below
 
-$define = [
-    'EMAIL_TEXT_NO_DELIVERY' => '<p>No Delivery, see below:',
-    'MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE' => 'Direct-Bank-Deposit - Australian',
-    'MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION' => 'Banking and Address details will also be sent to your email once the order is confirmed.<pre>' .
-        'Please use the following details to transfer <br>your total order value:' .
-        "\nBSB Number:   " . (defined('MODULE_PAYMENT_DIRBANKAUS_BSB') ? MODULE_PAYMENT_DIRBANKAUS_BSB : '(your BSB)' ) .
-        "\nAccount No.:  " . (defined('MODULE_PAYMENT_DIRBANKAUS_ACCNUM') ? MODULE_PAYMENT_DIRBANKAUS_ACCNUM :  '(your Ac num)' ).
-        "\nAccount Name: " . (defined('MODULE_PAYMENT_DIRBANKAUS_ACCNAM') ? MODULE_PAYMENT_DIRBANKAUS_ACCNAM : '(your Ac name)' ) .
-        "\nBank Name:    " . (defined('MODULE_PAYMENT_DIRBANKAUS_BANKNAM') ? MODULE_PAYMENT_DIRBANKAUS_BANKNAM : '(your bank name)' ) .
-        "\nReference:    " . $ln ."-" . $id . "-%s" .
-        '</pre>Thanks for your order which will ship immediately <br>once we receive payment in the above account.'
-        ,
-    'MODULE_PAYMENT_DIRBANKAUS_TEXT_EMAIL_FOOTER' => "Please use the following details to transfer <br>your total order value:\n" .
-        "\nBSB Number:   " . (defined('MODULE_PAYMENT_DIRBANKAUS_BSB') ? MODULE_PAYMENT_DIRBANKAUS_BSB : '<br> (your BSB)' ) .
-        "\nAccount No.:  " . (defined('MODULE_PAYMENT_DIRBANKAUS_ACCNUM') ? MODULE_PAYMENT_DIRBANKAUS_ACCNUM :  '(your Ac num)' ).
-        "\nAccount Name: " . (defined('MODULE_PAYMENT_DIRBANKAUS_ACCNAM') ? MODULE_PAYMENT_DIRBANKAUS_ACCNAM : '(your ac name)' ).
-        "\nBank Name:    " . (defined('MODULE_PAYMENT_DIRBANKAUS_BANKNAM') ? MODULE_PAYMENT_DIRBANKAUS_BANKNAM : '(your bank name)' ).
+if (defined('MODULE_PAYMENT_DIRBANKAUS_STATUS') &&
+    (defined('MODULE_PAYMENT_DIRBANKAUS_STATUS') == 'True') ) {
+       // BMH insert details on payment screen //
+    $define['MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION'] = 'Banking and Address details will also be sent to your email once the order is confirmed.<br>' .
+        '<br>Please use the following details to transfer your total order value:<br><pre>' .
+        "\nAccount No.:  " . MODULE_PAYMENT_DIRBANKAUS_ACCNUM .
+        "\nBSB Number:   " . MODULE_PAYMENT_DIRBANKAUS_BSB .
+        "\nAccount Name: " . MODULE_PAYMENT_DIRBANKAUS_ACCNAM .
+        "\nBank Name:    " . MODULE_PAYMENT_DIRBANKAUS_BANKNAM .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
-        "\nThanks for your order which will ship immediately once we receive payment in the above account.\n"
-        ,
-     'MODULE_PAYMENT_DIRBANKAUS_HTML_EMAIL_FOOTER' => '<br>Please use the following details to transfer <br>your total order value:<pre>' .
-        "\nBSB Number:   " . (defined('MODULE_PAYMENT_DIRBANKAUS_BSB')? MODULE_PAYMENT_DIRBANKAUS_BSB : '<br> (your BSB)' ) .
-        "\nAccount No.:  " . (defined('MODULE_PAYMENT_DIRBANKAUS_ACCNUM') ? MODULE_PAYMENT_DIRBANKAUS_ACCNUM :  '(your Ac num)' ).
-        "\nAccount Name: " . (defined('MODULE_PAYMENT_DIRBANKAUS_ACCNAM') ? MODULE_PAYMENT_DIRBANKAUS_ACCNAM : '(your ac name)' ).
-        "\nBank Name:    " . (defined('MODULE_PAYMENT_DIRBANKAUS_BANKNAM') ? MODULE_PAYMENT_DIRBANKAUS_BANKNAM : '(your bank name)' ).
+        '<p>Thanks for your order which will ship immediately <br>once we receive payment in the above account.</pre>' // BMH //
+        ;
+
+  $define ['MODULE_PAYMENT_DIRBANKAUS_TEXT_EMAIL_FOOTER'] = "Please use the following details to transfer your total order value:\n\n" .
+        "\nAccount No.:  " . MODULE_PAYMENT_DIRBANKAUS_ACCNUM .
+        "\nBSB Number:   " . MODULE_PAYMENT_DIRBANKAUS_BSB .
+        "\nAccount Name: " . MODULE_PAYMENT_DIRBANKAUS_ACCNAM .
+        "\nBank Name:    " . MODULE_PAYMENT_DIRBANKAUS_BANKNAM .
+        "\nSwift Code:   " . MODULE_PAYMENT_DIRBANKAUS_SWIFT .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
-        '</pre><br>Thanks for your order which will ship immediately once we receive payment in the above account.'
-        ,
-];
+        "\n\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKAUS_ADDRESS  .
+        "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKAUS_PAYABLE .
+        "\n\nThanks for your order which will ship immediately once we receive payment in the above account.\n"
+  ;
+
+    $define ['MODULE_PAYMENT_DIRBANKAUS_HTML_EMAIL_FOOTER'] = '<br>Please use the following details to transfer your total order value:<br>' .
+        "\nAccount No.:  " . MODULE_PAYMENT_DIRBANKAUS_ACCNUM .
+        "\nBSB Number:   " . MODULE_PAYMENT_DIRBANKAUS_BSB .
+        "\nAccount Name: " . MODULE_PAYMENT_DIRBANKAUS_ACCNAM .
+        "\nBank Name:    " . MODULE_PAYMENT_DIRBANKAUS_BANKNAM .
+        "\nSwift Code:   " . MODULE_PAYMENT_DIRBANKAUS_SWIFT .
+        "\nReference:    "  . $ln ."-" . $id . "-%s" .
+        "\n\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKAUS_ADDRESS .
+        "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKAUS_PAYABLE .
+        '<p>Thanks for your order which will ship immediately once we receive payment in the above account.'
+        ;
+    }else {
+        $define['MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION'] = '<br>Setup DirbankAUS';
+        $define['MODULE_PAYMENT_DIRBANKAUS_TEXT_EMAIL_FOOTER'] = 'Please Setup DirbankAUS';
+        $define['MODULE_PAYMENT_DIRBANKAUS_HTML_EMAIL_FOOTER']  = '<br>Please Setup DirbankAUS';
+}
 
 return $define;

@@ -3,6 +3,10 @@ to be read in conjunction with the main read me file
 
 Direct Bank Deposit Australia files only
 -----------------------------------------
+v2.1.1 2025-02-27
+suitable for Zen Cart v1.5.8a to v2.1.0
+
+
 v1.5.8 2024-02-02
  - removed reference to Cheques and Money Orders. and Swift codes
  - does not have language files for Zen Cart v1.5.7 and earlier

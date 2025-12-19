@@ -5,7 +5,7 @@ select * from CONFIGURATION  where configuration_key in (
             'MODULE_PAYMENT_DIRBANKNZ_ACCNUM',
             'MODULE_PAYMENT_DIRBANKNZ_ACCNAM',
             'MODULE_PAYMENT_DIRBANKNZ_BANKNAM',
-            'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID',
+            'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID');
 
 delete from CONFIGURATION  where configuration_key in (
             'MODULE_PAYMENT_DIRBANKNZ_STATUS',
@@ -14,4 +14,4 @@ delete from CONFIGURATION  where configuration_key in (
             'MODULE_PAYMENT_DIRBANKNZ_ACCNUM',
             'MODULE_PAYMENT_DIRBANKNZ_ACCNAM',
             'MODULE_PAYMENT_DIRBANKNZ_BANKNAM',
-            'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID',
+            'MODULE_PAYMENT_DIRBANKNZ_ORDER_STATUS_ID');
