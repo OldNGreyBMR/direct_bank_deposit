@@ -13,6 +13,7 @@ For Zen Cart 1.5.8a to v2.1.0 and PHP 8.1 to 8.4
 Remove zc_plugins folder installer created for each country as payment modules not compatible ZC plugins schema
  
 ================================================================
+
 Please read the install Instructions further down the page
 
 This is a simple module for those that want to provide a bank transfer payment option. Customers can choose to pay by direct money transfer into your Bank Account.
@@ -22,3 +23,4 @@ The Australian version of this module allows you to configure the following in t
 ~ Account Number
 ~ Bank Name
 ~Address
+
