@@ -28,7 +28,7 @@ v1.5.8 2024-02-02
  Original Mod Released 20/06/06
  
 Released under the GNU General Public License
-================================================================
+================================================================  
 Please read the install Instructions further down the page
 
 This is a simple module for those that want to provide a bank transfer payment option. Customers can choose to pay by direct money transfer into your Bank Account.
@@ -46,3 +46,4 @@ Copy the includes folder for your country to the root of your Zen Cart store.
 
 
 Go to Admin --> Modules --> Payment and click on the module and add your details
+
