@@ -5,6 +5,7 @@
 * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKNZ.php 1970 2010-6-22 06:57:21Z Nigel Thomson - adjusted from Crystal Jones code $ modify from Auzbank of OZcommerce module by birdbrain
 * @version $Id V2.1.2 DIRBANKNZ 2025-12-20  BMH (OldNGrey) for zc210 PHP 8.2 to PH P8.4
+//V2.1.2 2026-01-06
 */
 
 declare(strict_types = 1);
@@ -21,6 +22,7 @@ if (!defined('MODULE_PAYMENT_DIRBANKNZ_TEXT_TITLE')) {
     if (file_exists($new_langfile)) {
         global $languageLoader;
         $languageLoader->loadExtraLanguageFiles(DIR_FS_CATALOG . DIR_WS_LANGUAGES,  $_SESSION['language'], $folder . 'lang.'.$filename);
+        
     } else if (file_exists($old_langfile)) {
         $tpl_old_langfile = DIR_WS_LANGUAGES . $_SESSION['language'] . $folder .  $template_dir . '/' . $filename;
         if (file_exists($tpl_old_langfile)) {
@@ -34,7 +36,7 @@ if (!defined('MODULE_PAYMENT_DIRBANKNZ_TEXT_TITLE')) {
 $id=isset($_SESSION['customer_id']);
 $ln=ISSET($_SESSION['customer_last_name']);
 
-  class dirbanknz {
+class dirbanknz {
 
     public $code;
     public $description;        // $description is a soft name for this payment method @var string
