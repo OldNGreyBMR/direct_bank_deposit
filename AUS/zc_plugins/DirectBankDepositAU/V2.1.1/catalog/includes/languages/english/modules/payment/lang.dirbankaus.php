@@ -2,8 +2,10 @@
 // DIRBANKAUS based on  $Id: DIRBANKAUS.php 1970 2009-11-24 06:57:21Z CRYSTAL JONES $
 // BMH (OldNGrey) 2025-11-12 lang.dirbankaus.php for zc210 and zc220
 // Ver2.1.2 2026-01-06
-// If you wish to accept cheques Uncomment the "MODULE_PAYMENT_DIRBANKAUS_ADDRESS" and "MODULE_PAYMENT_DIRBANKAUS_PAYABLE" lines
-// If you wish to accept International Transfers using Swift Code uncomment the "MODULE_PAYMENT_DIRBANKAUS_SWIFT" lines
+
+//define('MODULE_PAYMENT_DIRBANKAUS_ADDRESS', '');
+//define('MODULE_PAYMENT_DIRBANKAUS_PAYABLE', '');
+//define('MODULE_PAYMENT_DIRBANKAUS_SWIFT', '');
 
 $define = [
     'MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION' => 'Direct Bank Transfer AU',
@@ -23,9 +25,6 @@ if (defined('MODULE_PAYMENT_DIRBANKAUS_STATUS')) {
         "\nAccount Name: " . MODULE_PAYMENT_DIRBANKAUS_ACCNAM .
         "\nBank Name:    " . MODULE_PAYMENT_DIRBANKAUS_BANKNAM .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
-       // "\nSwift Code:   " . MODULE_PAYMENT_DIRBANKAUS_SWIFT . 
-       // "\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKAUS_ADDRESS .
-       // "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKAUS_PAYABLE .
         '<p>Thanks for your order which will ship immediately <br>once we receive payment in the above account.</pre>' // BMH //
         ;
 

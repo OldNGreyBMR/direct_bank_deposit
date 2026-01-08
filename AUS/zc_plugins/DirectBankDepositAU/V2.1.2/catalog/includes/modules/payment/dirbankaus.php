@@ -1,12 +1,12 @@
 <?php
 /*
-* Copyright (c) 2003-2024 The zen-cart developers
+* Copyright (c) 2003-2026 The zen-cart developers
 *  Portions Copyright (c) 2003 osCommerce
 * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKAUS.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
-* @version $Id V2.1.2 DIRBANKAUS 2025-11-12  BMH (OldNGrey) for zc158 zc158a zc200 zc201 zc210 zc220 PHP8.2 to PHP8.4
+* @version $Id V2.1.2 DIRBANKAUS 2025-12-20  BMH (OldNGrey) for zc220 PHP 8.2 to PHP 8.4
 */
-// 2025-11-12 ln57
+
 declare(strict_types = 1);
 if (!defined('VERSION_AUS')) { define('VERSION_AUS', '2.1.2');}
 
@@ -32,7 +32,7 @@ if (!defined('MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE')) {
 }
 
 $id=isset($_SESSION['customer_id']);            //
-$ln=ISSET($_SESSION['customer_last_name']);     //
+$ln=isset($_SESSION['customer_last_name']);     //
 
 class dirbankaus {
     public $code;
@@ -53,7 +53,7 @@ class dirbankaus {
       $this->code = 'dirbankaus';
       $this->title = MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE;
       $this->description = 'V' . VERSION_AUS . ' ' . MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION; // show version in admin panel
-      $this->email_footer = MODULE_PAYMENT_DIRBANKAUS_TEXT_EMAIL_FOOTER;
+      $this->email_footer = defined('MODULE_PAYMENT_DIRBANKAUS_TEXT_EMAIL_FOOTER');
       $this->sort_order = defined('MODULE_PAYMENT_DIRBANKAUS_SORT_ORDER') ? MODULE_PAYMENT_DIRBANKAUS_SORT_ORDER : null; // BMH 2025-11-12
       $this->enabled = (defined('MODULE_PAYMENT_DIRBANKAUS_STATUS') && MODULE_PAYMENT_DIRBANKAUS_STATUS == 'True'); // BMH 2025-11-12
 
@@ -110,7 +110,7 @@ class dirbankaus {
     }
 
     function confirmation() {
-      return array('title' => MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION );
+      return array('title' => MODULE_PAYMENT_DIRBANKAUS_TEXT_DESCRIPTION);
     }
 
     function process_button() {
@@ -160,10 +160,23 @@ class dirbankaus {
 
     function remove() {
       global $db;
-      $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
+      $db->Execute("delete from " . TABLE_CONFIGURATION . " 
+      where configuration_key in ('" . implode("', '", $this->keys()) . "')");
     }
 
     function keys() {
-        return array('MODULE_PAYMENT_DIRBANKAUS_STATUS', 'MODULE_PAYMENT_DIRBANKAUS_ZONE', 'MODULE_PAYMENT_DIRBANKAUS_SORT_ORDER', 'MODULE_PAYMENT_DIRBANKAUS_BSB', 'MODULE_PAYMENT_DIRBANKAUS_ACCNUM', 'MODULE_PAYMENT_DIRBANKAUS_ACCNAM', 'MODULE_PAYMENT_DIRBANKAUS_SWIFT', 'MODULE_PAYMENT_DIRBANKAUS_BANKNAM', 'MODULE_PAYMENT_DIRBANKAUS_ORDER_STATUS_ID' , 'MODULE_PAYMENT_DIRBANKAUS_ADDRESS', 'MODULE_PAYMENT_DIRBANKAUS_PAYABLE');
+        return array(
+            'MODULE_PAYMENT_DIRBANKAUS_STATUS', 
+            'MODULE_PAYMENT_DIRBANKAUS_ZONE', 
+            'MODULE_PAYMENT_DIRBANKAUS_SORT_ORDER', 
+            'MODULE_PAYMENT_DIRBANKAUS_BSB', 
+            'MODULE_PAYMENT_DIRBANKAUS_ACCNUM', 
+            'MODULE_PAYMENT_DIRBANKAUS_ACCNAM', 
+            'MODULE_PAYMENT_DIRBANKAUS_SWIFT', 
+            'MODULE_PAYMENT_DIRBANKAUS_BANKNAM', 
+            'MODULE_PAYMENT_DIRBANKAUS_ORDER_STATUS_ID', 
+            'MODULE_PAYMENT_DIRBANKAUS_ADDRESS', 
+            'MODULE_PAYMENT_DIRBANKAUS_PAYABLE'
+            );
     }
   } // eof class
