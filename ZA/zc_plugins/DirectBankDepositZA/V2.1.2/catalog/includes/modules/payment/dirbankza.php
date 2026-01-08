@@ -5,6 +5,7 @@
 * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKZA.php 1970 2010-6-22 06:57:21Z Nigel Thomson - adjusted from Crystal Jones code $ modify from Auzbank of OZcommerce module by birdbrain
 * @version $Id V2.1.2 DIRBANKZA 20245-12-20  BMH (OldNGrey) for zc 220 PHP 8.2 to PHP 8.4
+//2.1.2 2026-01-06
 */
 
 declare(strict_types = 1);
