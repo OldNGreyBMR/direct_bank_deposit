@@ -5,11 +5,32 @@
 * * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 * $Id: DIRBANKCA.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
 * @version $Id V2.1.2 DIRBANKCA 2025-02-26  BMH (OldNGrey) for zc220 and PHP8.3 to PHP8.5
+V2.1.2 2026-01-06
 */
 
 declare(strict_types = 1);
 if (!defined('VERSION_CA')) { define('VERSION_CA', '2.1.2');}
+// check which zc version and preload language files if required. Language files may be required if this module is called directly eg from edit _orders
+/*
+if (!defined('MODULE_PAYMENT_DIRBANKAUS_TEXT_TITLE')) {
+    $filename = "dirbankaus.php";
+    $folder = "/modules/payment/";  // end with slash
+    $old_langfile = DIR_FS_CATALOG . DIR_WS_LANGUAGES . $_SESSION['language'] . $folder .  $filename;
+    $new_langfile = DIR_FS_CATALOG . DIR_WS_LANGUAGES . $_SESSION['language'] . $folder .  "lang." . $filename;
 
+    if (file_exists($new_langfile)) {
+        global $languageLoader;
+        $languageLoader->loadExtraLanguageFiles(DIR_FS_CATALOG . DIR_WS_LANGUAGES,  $_SESSION['language'], $folder . 'lang.'.$filename);
+
+    } else if (file_exists($old_langfile)) {
+        $tpl_old_langfile = DIR_WS_LANGUAGES . $_SESSION['language'] . $folder .  $template_dir . '/' . $filename;
+        if (file_exists($tpl_old_langfile)) {
+            $old_langfile = $tpl_old_langfile;
+        }
+        include_once ($old_langfile);
+    }
+}
+*/
 $id=isset($_SESSION['customer_id']);            //
 $ln=isset($_SESSION['customer_last_name']);     //
 
@@ -31,7 +52,7 @@ $ln=isset($_SESSION['customer_last_name']);     //
       $this->code = 'dirbankca';
       $this->title = MODULE_PAYMENT_DIRBANKCA_TEXT_TITLE;
       $this->description = 'V' . VERSION_CA . ' ' . MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION; // show version in admin panel
-      $this->email_footer = MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER;
+      $this->email_footer = defined('MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER');
       $this->sort_order = defined('MODULE_PAYMENT_DIRBANKCA_SORT_ORDER') ? ((int)MODULE_PAYMENT_DIRBANKCA_SORT_ORDER) : null;
       $this->enabled = defined('MODULE_PAYMENT_DIRBANKCA_STATUS') && (MODULE_PAYMENT_DIRBANKCA_STATUS  == 'True') ;
 
@@ -99,6 +120,10 @@ $ln=isset($_SESSION['customer_last_name']);     //
       return false;
     }
 
+    function after_order_create($order_id) {
+      $this->email_footer = sprintf(MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER, $order_id);
+    }
+
     function after_process() {
       return false;
     }
@@ -117,13 +142,11 @@ $ln=isset($_SESSION['customer_last_name']);     //
       return $this->_check;
     }
 
+
+
     function install() {
-      global $db, $messageStack;
-      if (defined('MODULE_PAYMENT_DIRBANKCA_STATUS')) {
-        $messageStack->add_session('DirBankCA module already installed.', 'error');
-        zen_redirect(zen_href_link(FILENAME_MODULES, 'set=payment&module=dirbankca', 'NONSSL'));
-        return 'failed';
-      }
+      global $db; 
+
      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
         configuration_value, configuration_description, configuration_group_id, sort_order, set_function,
         date_added) values ('Enable Direct Bank Deposit Module', 'MODULE_PAYMENT_DIRBANKCA_STATUS', 'True',
@@ -138,7 +161,7 @@ $ln=isset($_SESSION['customer_last_name']);     //
 
      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
         configuration_value, configuration_description, configuration_group_id, sort_order, date_added)
-        values ('Sort order of display.', 'MODULE_PAYMENT_DIRBANKCA_SORT_ORDER', '0', 'Sort order of display.
+        values ('Sort order of display.', 'MODULE_PAYMENT_DIRBANKCA_SORT_ORDER', '10', 'Sort order of display.
         Lowest is displayed first.', '6', '0', now())");
 
      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,

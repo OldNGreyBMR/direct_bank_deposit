@@ -1,10 +1,8 @@
 <?php
 // DIRBANKCA based on  DIRBANKAUS $Id: DIRBANKCA.php 1970 2009-11-24 06:57:21Z CRYSTAL JONES $
 // BMH (OldNGrey) v2.1.2 2025-12-20  lang.dirbankca.php for zc2200 PHP 8.3 to PHP 8.5
-// Ver 2.1.2
-
-define('MODULE_PAYMENT_DIRBANKCA_ADDRESS', '');
-define('MODULE_PAYMENT_DIRBANKCA_PAYABLE', '');
+// Ver 2.1.2 2026-01-06
+// If you wish to accept cheques Uncomment the "MODULE_PAYMENT_DIRBANKCA_ADDRESS" and "MODULE_PAYMENT_DIRBANKCA_PAYABLE" lines
 
 $define = [
     'MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION' => 'Direct Bank Transfer CA',
@@ -19,40 +17,40 @@ if (defined('MODULE_PAYMENT_DIRBANKCA_STATUS') &&       //  insert details on pa
     (defined('MODULE_PAYMENT_DIRBANKCA_STATUS') == 'True') ){ 
     $define['MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION'] = 'Banking and Address details will also be sent to your email once the order is confirmed.<br>' .
         '<br>Please use the following details to transfer your total order value:<br><pre>' .
-        "\nInstitution No.:  " . defined('MODULE_PAYMENT_DIRBANKCA_INSTNUM') .
-        "\nTransit Number:" .    defined('MODULE_PAYMENT_DIRBANKCA_TRANSIT') .
-        "\nAccount Name: " .     defined('MODULE_PAYMENT_DIRBANKCA_ACCNAM')  .
-        "\nAccount Number:  " .  defined('MODULE_PAYMENT_DIRBANKCA_ACCNUM')  .
+        "\nInstitution No.:  " . MODULE_PAYMENT_DIRBANKCA_INSTNUM .
+        "\nTransit Number:" .    MODULE_PAYMENT_DIRBANKCA_TRANSIT .
+        "\nAccount Name: " .     MODULE_PAYMENT_DIRBANKCA_ACCNAM  .
+        "\nAccount Number:  " .  MODULE_PAYMENT_DIRBANKCA_ACCNUM  .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
         '<p>Thanks for your order which will ship immediately <br>once we receive payment in the above account.  </pre>'
        ;
 
     $define['MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER'] = "Please use the following details to transfer your total order value:\n\n" .
-        "\nInstitution No.:  " .   defined('MODULE_PAYMENT_DIRBANKCA_INSTNUM') .
-        "\nTransit Number:" .      defined('MODULE_PAYMENT_DIRBANKCA_TRANSIT') .
-        "\nAccount Name: " .       defined('MODULE_PAYMENT_DIRBANKCA_ACCNAM') .
-        "\nAccount Number:    " .  defined('MODULE_PAYMENT_DIRBANKCA_ACCNUM') .
+        "\nInstitution No.:  " .   MODULE_PAYMENT_DIRBANKCA_INSTNUM .
+        "\nTransit Number:" .      MODULE_PAYMENT_DIRBANKCA_TRANSIT .
+        "\nAccount Name: " .       MODULE_PAYMENT_DIRBANKCA_ACCNAM .
+        "\nAccount Number:    " .  MODULE_PAYMENT_DIRBANKCA_ACCNUM .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
-        "\n\nSend Cheques/Money Orders To:    " . defined('MODULE_PAYMENT_DIRBANKCA_ADDRESS')  .
-        "\nCheques/Money Orders Payable To:   " . defined('MODULE_PAYMENT_DIRBANKCA_PAYABLE') .
+      //  "\n\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKCA_ADDRESS  .
+      //  "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKCA_PAYABLE .
         "\n\nThanks for your order which will ship immediately once we receive payment in the above account.\n"
        ;
 
     $define['MODULE_PAYMENT_DIRBANKCA_HTML_EMAIL_FOOTER']  = 'Please use the following details to transfer your total order value:<br>' .
-        "\nInstitution No.:  " .   defined(' MODULE_PAYMENT_DIRBANKCA_INSTNUM') .
-        "\nTransit Number:" .      defined(' MODULE_PAYMENT_DIRBANKCA_TRANSIT') .
-        "\nAccount Name: " .       defined(' MODULE_PAYMENT_DIRBANKCA_ACCNAM') .
-        "\nAccount Number:    " .  defined(' MODULE_PAYMENT_DIRBANKCA_ACCNUM') .
+        "\nInstitution No.:  " .    MODULE_PAYMENT_DIRBANKCA_INSTNUM .
+        "\nTransit Number:" .       MODULE_PAYMENT_DIRBANKCA_TRANSIT .
+        "\nAccount Name: " .        MODULE_PAYMENT_DIRBANKCA_ACCNAM .
+        "\nAccount Number:    " .   MODULE_PAYMENT_DIRBANKCA_ACCNUM .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
-        "\n\nSend Cheques/Money Orders To:    " . defined('MODULE_PAYMENT_DIRBANKCA_ADDRESS') .
-        "\nCheques/Money Orders Payable To:   " . defined('MODULE_PAYMENT_DIRBANKCA_PAYABLE') .
+      //  "\n\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKCA_ADDRESS .
+      //  "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKCA_PAYABLE .
         '<p>Thanks for your order which will ship immediately once we receive payment in the above account.'
        ;
     }
-else {
-        $define['MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION'] = '<br>Setup DirbankCA';
-        $define['MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER'] = 'Please Setup DirbankCA';
-        $define['MODULE_PAYMENT_DIRBANKCA_HTML_EMAIL_FOOTER']  = '<br>Please Setup DirbankCA';
+    else {
+       $define['MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION'] = '<br>Setup DirbankCA';
+       $define['MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER'] = 'Please Setup DirbankCA';
+       $define['MODULE_PAYMENT_DIRBANKCA_HTML_EMAIL_FOOTER']  = '<br>Please Setup DirbankCA';
 }
 
 return $define;
