@@ -4,6 +4,7 @@
  *  Portions Copyright (c) 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id V2.1.2 DIRBANKUSA 2025-12-20  BMH (OldNGrey) for zc220 PHP 8.2 to PHP 8.4
+ //V2.1.2 2026-01-06
  */
 
 declare(strict_types=1);
