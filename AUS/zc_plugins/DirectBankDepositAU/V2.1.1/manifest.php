@@ -1,0 +1,12 @@
+<?php
+return [
+    'pluginVersion' => 'v2.1.1',
+    'pluginName' => 'Dirbank-AUS',
+    'pluginDescription' => 'Direct bank deposit - Australia.',
+    'pluginAuthor' => 'OldNGrey (BMR)',
+    'pluginId' => 60, // ID from Zen Cart forum
+    'zcVersions' => ['v158', 'v158a', 'v2.0.0', 'v2.1.0'],
+    'changelog' => '', // online URL (eg github release tag page, or changelog file there) or local filename only, ie: changelog.txt (in same dir as this manifest file)
+    'github_repo' => 'https://github.com/OldNGreyBMR/direct_bank_deposit', // url
+    'pluginGroups' => [],
+];
