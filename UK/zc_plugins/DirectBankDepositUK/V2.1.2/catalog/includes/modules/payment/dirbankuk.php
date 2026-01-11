@@ -9,7 +9,7 @@
  */
 
 declare(strict_types=1);
-if (!defined('VERSION_UK')) {   define('VERSION_UK', '2.1.1'); }
+if (!defined('VERSION_UK')) {   define('VERSION_UK', '2.1.2'); }
 
 // check which zc version and preload language files if required. Language files may be required if this module is called directly eg from edit _orders
 
