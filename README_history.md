@@ -6,8 +6,9 @@
 # For Zen Cart v2.1.0 and PHP 8.3 to 8.4
 Create zc_plugins folder installer for AU, CA, NZ, UK, USA, ZA
 
-NOT FOR zc versions before ZC2.1.0
+Plugin is NOT FOR zc versions before ZC2.1.0
 ----------------------------------
+For ZC Version 1.5.8 and 2.0.0 specific instructions are included
 
 2025-02-24 V2.1.1
 For Zen Cart 1.5.8a to v2.1.0 and PHP 8.1 to 8.4
