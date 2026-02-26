@@ -2,8 +2,8 @@
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
  
-2026-01-10 V2.1.2  
-Updated 2026-02-14
+2026-02-27 V2.1.2a  
+ 
 # Plugin Installler for Zen Cart v2.2.0 and PHP 8.3 to 8.4
 Read the installation instructions below.  
 
@@ -88,3 +88,4 @@ To enable it for virtual products edit the dirbankXX.php file and
           $this->enabled = true;
         }
     "
+
