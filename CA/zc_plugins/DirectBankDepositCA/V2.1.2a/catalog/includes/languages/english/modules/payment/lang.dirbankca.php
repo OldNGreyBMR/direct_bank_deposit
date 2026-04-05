@@ -1,7 +1,7 @@
 <?php
 // DIRBANKCA based on  DIRBANKAUS $Id: DIRBANKCA.php 1970 2009-11-24 06:57:21Z CRYSTAL JONES $
 // BMH (OldNGrey) v2.1.2 2025-12-20  lang.dirbankca.php for zc2200 PHP 8.3 to PHP 8.5
-// Ver 2.1.2a 2026-02-27
+// Ver 2.1.2a 2026-024-06
 // If you wish to accept cheques Uncomment the "MODULE_PAYMENT_DIRBANKCA_ADDRESS" and "MODULE_PAYMENT_DIRBANKCA_PAYABLE" lines
 
 $define = [
@@ -17,19 +17,19 @@ if (defined('MODULE_PAYMENT_DIRBANKCA_STATUS') &&       //  insert details on pa
     (defined('MODULE_PAYMENT_DIRBANKCA_STATUS') == 'True') ){ 
     $define['MODULE_PAYMENT_DIRBANKCA_TEXT_DESCRIPTION'] = 'Banking and Address details will also be sent to your email once the order is confirmed.<br>' .
         '<br>Please use the following details to transfer your total order value:<br><pre>' .
-        "\nInstitution No.:  " . MODULE_PAYMENT_DIRBANKCA_INSTNUM .
-        "\nTransit Number:" .    MODULE_PAYMENT_DIRBANKCA_TRANSIT .
-        "\nAccount Name: " .     MODULE_PAYMENT_DIRBANKCA_ACCNAM  .
-        "\nAccount Number:  " .  MODULE_PAYMENT_DIRBANKCA_ACCNUM  .
+        "\nInstitution No.:  " . (defined('MODULE_PAYMENT_DIRBANKCA_INSTNUM') ? MODULE_PAYMENT_DIRBANKCA_INSTNUM : 'enter Institution Number') .
+        "\nTransit Number:" .    (defined('MODULE_PAYMENT_DIRBANKCA_TRANSIT') ? MODULE_PAYMENT_DIRBANKCA_TRANSIT : 'enter Transit Number') .
+        "\nAccount Name: " .     (defined('MODULE_PAYMENT_DIRBANKCA_ACCNAM') ? MODULE_PAYMENT_DIRBANKCA_ACCNAM : 'enter Account Name')  .
+        "\nAccount Number:  " .  (defined('MODULE_PAYMENT_DIRBANKCA_ACCNUM') ? MODULE_PAYMENT_DIRBANKCA_ACCNUM : 'enter Account Number')  .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
         "<p>Thanks for your order which will ship immediately <br>once we receive payment in the above account.  </pre>"
        ;
 
     $define['MODULE_PAYMENT_DIRBANKCA_TEXT_EMAIL_FOOTER'] = "Please use the following details to transfer your total order value:\n\n" .
-        "\nInstitution No.:  " .   MODULE_PAYMENT_DIRBANKCA_INSTNUM .
-        "\nTransit Number:" .      MODULE_PAYMENT_DIRBANKCA_TRANSIT .
-        "\nAccount Name: " .       MODULE_PAYMENT_DIRBANKCA_ACCNAM .
-        "\nAccount Number:    " .  MODULE_PAYMENT_DIRBANKCA_ACCNUM .
+        "\nInstitution No.:  " .   (defined('MODULE_PAYMENT_DIRBANKCA_INSTNUM') ? MODULE_PAYMENT_DIRBANKCA_INSTNUM : 'enter Institution Number') .
+        "\nTransit Number:" .      (defined('MODULE_PAYMENT_DIRBANKCA_TRANSIT') ? MODULE_PAYMENT_DIRBANKCA_TRANSIT : 'enter Transit Number') .
+        "\nAccount Name: " .       (defined('MODULE_PAYMENT_DIRBANKCA_ACCNAM') ? MODULE_PAYMENT_DIRBANKCA_ACCNAM : 'enter Account Name') .
+        "\nAccount Number:    " .  (defined('MODULE_PAYMENT_DIRBANKCA_ACCNUM') ? MODULE_PAYMENT_DIRBANKCA_ACCNUM : 'enter Account Number') .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
       //  "\n\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKCA_ADDRESS  .
       //  "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKCA_PAYABLE .
@@ -37,10 +37,10 @@ if (defined('MODULE_PAYMENT_DIRBANKCA_STATUS') &&       //  insert details on pa
        ;
 
     $define['MODULE_PAYMENT_DIRBANKCA_HTML_EMAIL_FOOTER']  = 'Please use the following details to transfer your total order value:<br>' .
-        "\nInstitution No.:  " .    MODULE_PAYMENT_DIRBANKCA_INSTNUM .
-        "\nTransit Number:" .       MODULE_PAYMENT_DIRBANKCA_TRANSIT .
-        "\nAccount Name: " .        MODULE_PAYMENT_DIRBANKCA_ACCNAM .
-        "\nAccount Number:    " .   MODULE_PAYMENT_DIRBANKCA_ACCNUM .
+        "\nInstitution No.:  " .    (defined('MODULE_PAYMENT_DIRBANKCA_INSTNUM') ? MODULE_PAYMENT_DIRBANKCA_INSTNUM : 'enter Institution Number') .
+        "\nTransit Number:" .       (defined('MODULE_PAYMENT_DIRBANKCA_TRANSIT') ? MODULE_PAYMENT_DIRBANKCA_TRANSIT : 'enter Transit Number') .
+        "\nAccount Name: " .        (defined('MODULE_PAYMENT_DIRBANKCA_ACCNAM') ? MODULE_PAYMENT_DIRBANKCA_ACCNAM : 'enter Account Name') .
+        "\nAccount Number:    " .   (defined('MODULE_PAYMENT_DIRBANKCA_ACCNUM') ? MODULE_PAYMENT_DIRBANKCA_ACCNUM : 'enter Account Number') .
         "\nReference:    "  . $ln ."-" . $id . "-%s" .
       //  "\n\nSend Cheques/Money Orders To:    " . MODULE_PAYMENT_DIRBANKCA_ADDRESS .
       //  "\nCheques/Money Orders Payable To:   " . MODULE_PAYMENT_DIRBANKCA_PAYABLE .

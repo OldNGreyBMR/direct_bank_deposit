@@ -5,11 +5,11 @@
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * $Id: DIRBANKAUS.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
  * @version $Id V2.1.2 DIRBANKUK 2025-12-20  BMH (OldNGrey) for zc22 PHP 8.2 to PHP 8.4
- // V2.1.2 2026-01-06
+ // V2.1.2a 2026-02-27
  */
 
 declare(strict_types=1);
-if (!defined('VERSION_UK')) {   define('VERSION_UK', '2.1.1'); }
+if (!defined('VERSION_UK')) {   define('VERSION_UK', '2.1.2a'); }
 
 // check which zc version and preload language files if required. Language files may be required if this module is called directly eg from edit _orders
 

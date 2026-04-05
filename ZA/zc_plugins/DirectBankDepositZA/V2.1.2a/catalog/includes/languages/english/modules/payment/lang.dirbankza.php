@@ -1,7 +1,7 @@
 <?php
 // DIRBANKZA based on  $Id: DIRBANKNZA.php 1970 2010-6-22 06:57:21Z Nigel Thomson - adjusted from Crystal Jones code $
 // BMH (OldNGrey) v2.1.2 2025-12-20 lang.dirbankza.php for zc220 PHP 8.2 to PHP 8.4
-// V2.1.2a 2026-02-27
+// V2.1.2a 2026-04-06
 
 $define = [
     'MODULE_PAYMENT_DIRBANKZA_TEXT_DESCRIPTION' => 'Direct Bank Transfer - ZA',
@@ -18,28 +18,28 @@ if (defined('MODULE_PAYMENT_DIRBANKZA_STATUS') &&
         (defined('MODULE_PAYMENT_DIRBANKZA_STATUS') == 'True') ) {          //  insert details on payment screen //
     $define['MODULE_PAYMENT_DIRBANKZA_TEXT_DESCRIPTION'] = 'Banking and Address details will also be sent to your email once the order is confirmed.<br>' .
         '<br>Please use the following details to transfer your total order value:<br><pre>' .
-		"\nAccount Name:  " . MODULE_PAYMENT_DIRBANKZA_ACCNAM .  
-		"\nAccount No.:   " . MODULE_PAYMENT_DIRBANKZA_ACCNUM . 
-        "\nBank Name:     " . MODULE_PAYMENT_DIRBANKZA_BANKNAM . 
-        "\nBranch Code:   " . MODULE_PAYMENT_DIRBANKZA_BANKCODE . 
+		"\nAccount Name:  " . (defined('MODULE_PAYMENT_DIRBANKZA_ACCNAM') ? MODULE_PAYMENT_DIRBANKZA_ACCNAM : 'enter Account Name') .  
+		"\nAccount No.:   " . (defined('MODULE_PAYMENT_DIRBANKZA_ACCNUM') ? MODULE_PAYMENT_DIRBANKZA_ACCNUM : 'enter Account Number') . 
+        "\nBank Name:     " . (defined('MODULE_PAYMENT_DIRBANKZA_BANKNAM') ? MODULE_PAYMENT_DIRBANKZA_BANKNAM : 'enter Bank Name') . 
+        "\nBranch Code:   " . (defined('MODULE_PAYMENT_DIRBANKZA_BANKCODE') ? MODULE_PAYMENT_DIRBANKZA_BANKCODE : 'enter Branch Code') . 
         "\nReference:      " . $ln ."-" . $id . "-%s" .
         "<p>Thanks for your order which will ship immediately <br>once we receive payment in the above account. </pre>" // BMH //
         ;
 
   $define ['MODULE_PAYMENT_DIRBANKZA_TEXT_EMAIL_FOOTER'] = "Please use the following details to transfer your total order value:\n" .
-		"\nAccount Name:  " . MODULE_PAYMENT_DIRBANKZA_ACCNAM .  
-		"\nAccount No.:   " . MODULE_PAYMENT_DIRBANKZA_ACCNUM . 
-        "\nBank Name:     " . MODULE_PAYMENT_DIRBANKZA_BANKNAM . 
-        "\nBranch Code:   " . MODULE_PAYMENT_DIRBANKZA_BANKCODE . 
+		"\nAccount Name:  " . (defined('MODULE_PAYMENT_DIRBANKZA_ACCNAM') ? MODULE_PAYMENT_DIRBANKZA_ACCNAM : 'enter Account Name') .  
+		"\nAccount No.:   " . (defined('MODULE_PAYMENT_DIRBANKZA_ACCNUM') ? MODULE_PAYMENT_DIRBANKZA_ACCNUM : 'enter Account Number') . 
+        "\nBank Name:     " . (defined('MODULE_PAYMENT_DIRBANKZA_BANKNAM') ? MODULE_PAYMENT_DIRBANKZA_BANKNAM : 'enter Bank Name') . 
+        "\nBranch Code:   " . (defined('MODULE_PAYMENT_DIRBANKZA_BANKCODE') ? MODULE_PAYMENT_DIRBANKZA_BANKCODE : 'enter Branch Code') . 
          "\nReference:     " . $ln ."-" . $id . "-%s" .
         "\n\nThanks for your order which will ship immediately once we receive payment in the above account.\n"
   ;
 
     $define ['MODULE_PAYMENT_DIRBANKZA_HTML_EMAIL_FOOTER'] = '<br>Please use the following details to transfer your total order value:<br><em>' .
-		"\nAccount Name:  " . MODULE_PAYMENT_DIRBANKZA_ACCNAM .  
-		"\nAccount No.:   " . MODULE_PAYMENT_DIRBANKZA_ACCNUM . 
-        "\nBank Name:     " . MODULE_PAYMENT_DIRBANKZA_BANKNAM . 
-        "\nBranch Code:   " . MODULE_PAYMENT_DIRBANKZA_BANKCODE . 
+		"\nAccount Name:  " . (defined('MODULE_PAYMENT_DIRBANKZA_ACCNAM') ? MODULE_PAYMENT_DIRBANKZA_ACCNAM : 'enter Account Name') .  
+		"\nAccount No.:   " . (defined('MODULE_PAYMENT_DIRBANKZA_ACCNUM') ? MODULE_PAYMENT_DIRBANKZA_ACCNUM : 'enter Account Number') . 
+        "\nBank Name:     " . (defined('MODULE_PAYMENT_DIRBANKZA_BANKNAM') ? MODULE_PAYMENT_DIRBANKZA_BANKNAM : 'enter Bank Name') . 
+        "\nBranch Code:   " . (defined('MODULE_PAYMENT_DIRBANKZA_BANKCODE') ? MODULE_PAYMENT_DIRBANKZA_BANKCODE : 'enter Branch Code') . 
         "\nReference:      " . $ln ."-" . $id . "-%s" .
         "</em><p>Thanks for your order which will ship immediately once we receive payment in the above account."
         ;

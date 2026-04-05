@@ -2,9 +2,9 @@
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
  
-2026-02-27 V2.1.2a  
+2026-04-06 V2.1.2a  
  
-# Plugin Installler for Zen Cart v2.2.0 and PHP 8.3 to 8.4
+# Plugin Installler for Zen Cart v2.2.0, v2.2.1, v2.2.2 and PHP 8.3 to 8.4
 Read the installation instructions below.  
 
 **The Plugin Installer is _NOT_ FOR Zen Cart versions before Zen Cart 2.1.0**  
