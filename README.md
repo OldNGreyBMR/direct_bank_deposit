@@ -1,8 +1,8 @@
-# direct_bank_deposit 
-# 2026-09-04 V2.1.3
+# direct_bank_deposit
+# 2026-09-05 V2.1.3
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
- 
+ This plugin release intergrates with One Page Checkout (OPC) to display banking details on the Checkout page in the "Bottom Instructions" box.
 # Plugin Installler for Zen Cart v2.1.0, v2.2.0, v2.2.1, v2.2.2 and PHP 8.2 to 8.5
 Read the installation instructions below.  
 
@@ -55,11 +55,14 @@ Account Name
 Bank Name  
 
 # INSTALLATION INSTRUCTIONS  
+##  2026-09-04 REVISION
+TO INSTALL on ZC V2.1.0 and greater
+=======================================
 
-##  TO INSTALL on ZC V2.1.0 and greater
-Copy the relevant folder to the Zen Cart zc_plugins folder, eg under direct_bank_deposit/AUS copy zc_plugins to the zen cart store root.
-In the Admin > Modules > Plugin Manager Install the plugin.
-In the Admin > Modules > Payment Modules select the module and press "Install Module", configure the fields and press "update".
+- Copy the zc_plugins folder to Zen Cart root folder. 
+- DELETE the DirectBankDepositXX countries that you do not need. 
+- In the Admin > Modules > Plugin Manager Install the plugin.
+- In the Admin > Modules > Payment Modules select the module and press "Install Module", configure the fields and press "update".
 
 When populated, the bank details are displayed in the admin module. 
 The field "Reference" displays "--$s". This is a payment reference code that displays the customer id 
@@ -89,4 +92,3 @@ To enable it for virtual products edit the dirbankXX.php file and
           $this->enabled = true;
         }
     "
-
