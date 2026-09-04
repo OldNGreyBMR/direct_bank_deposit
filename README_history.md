@@ -1,7 +1,8 @@
 # direct_bank_deposit
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
- 
+## 2026-09-04 revised folder structure restructured to make "one canonical install root" 
+
 2026-04-06 V2.1.2a
 # For Zen Cart v2.1.0, v2.2.0, v2.2.1, v2.2.0 and PHP 8.3 to 8.4
 Create zc_plugins folder installer for AU, CA, NZ, UK, USA, ZA

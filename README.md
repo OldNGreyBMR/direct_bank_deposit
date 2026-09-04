@@ -1,9 +1,10 @@
 # direct_bank_deposit
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
- 
+## 2026-09-04 V2.1.2a restructured to make "one canonical install root" 
+
 2026-04-06 V2.1.2a  
- 
+
 # Plugin Installler for Zen Cart v2.2.0, v2.2.1, v2.2.2 and PHP 8.3 to 8.4
 Read the installation instructions below.  
 
@@ -55,9 +56,10 @@ Account Name
 Bank Name  
 
 # INSTALLATION INSTRUCTIONS  
-
-##  TO INSTALL on ZC V2.1.0 and greater
-Copy the relevant folder to the Zen Cart zc_plugins folder.
+ ##  2026-09-04 REVISION
+ TO INSTALL on ZC V2.1.0 and greater
+ =======================================
+Copy the zc_plugins folder to Zen Cart root folder. DELETE the DirectBankDepositXX countries that you do not need. 
 In the Admin > Modules > Plugin Manager Install the plugin.
 In the Admin > Modules > Payment Modules select the module and press "Install Module", configure the fields and press "update".
 
