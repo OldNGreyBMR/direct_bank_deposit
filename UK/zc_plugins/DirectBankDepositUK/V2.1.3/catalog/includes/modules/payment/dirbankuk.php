@@ -1,15 +1,21 @@
 <?php
-/*
- * Copyright (c) 2003-2026 The zen-cart developers
- * Portions Copyright (c) 2003 osCommerce
+/**
+ * Direct Bank Deposit - UK payment module (dirbankuk).
+ *
+ * @copyright Copyright 2003-2026 Zen Cart Development Team
+ * Portions Copyright 2003 osCommerce
+ * Modifications Copyright 2025-2026 BMH (OldNGrey)
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * $Id: DIRBANKAUS.php 1106 2009-11-24 22:05:35Z CRYSTAL JONES $ modify from Auzbank of OZcommerce module by birdbrain
- * @version $Id V2.1.2 DIRBANKUK 2025-12-20  BMH (OldNGrey) for zc22 PHP 8.2 to PHP 8.4
- // V2.1.2a 2026-02-27
+ * @version $Id: OldNGrey 2026 Aug 25 Modified in V2.1.3 $
+ *
+ * Derived from Auzbank of OZcommerce (birdbrain) via DIRBANKAUS (Crystal Jones, 2009).
+ * V2.1.2  2025-12-20  updated for zc22x, PHP 8.2 to PHP 8.4
+ * V2.1.2a 2026-02-27
+ * V2.1.3  2026-08-25  One-Page Checkout integration (bottom-instructions observer)
  */
 
 declare(strict_types=1);
-if (!defined('VERSION_UK')) {   define('VERSION_UK', '2.1.2a'); }
+if (!defined('VERSION_UK')) {   define('VERSION_UK', '2.1.3'); }
 
 // check which zc version and preload language files if required. Language files may be required if this module is called directly eg from edit _orders
 
@@ -149,40 +155,40 @@ class dirbankuk {
         $messageStack->add_session('DirBankUK module already installed.', 'error');
         zen_redirect(zen_href_link(FILENAME_MODULES, 'set=payment&module=dirbankuk', 'NONSSL'));
         return 'failed';
-      } 
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, set_function, 
-        date_added) values ('Enable Direct Bank Deposit Module', 'MODULE_PAYMENT_DIRBANKUK_STATUS', 'True', 
+      }
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, set_function,
+        date_added) values ('Enable Direct Bank Deposit Module', 'MODULE_PAYMENT_DIRBANKUK_STATUS', 'True',
         'Do you want to accept UK Bank Deposit payments?', '6', '1', 'zen_cfg_select_option(array(\'True\', \'False\'), ', now())");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, use_function, 
-        set_function, date_added) values ('Payment Zone', 'MODULE_PAYMENT_DIRBANKUK_ZONE', '0', 'If a zone is selected, 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, use_function,
+        set_function, date_added) values ('Payment Zone', 'MODULE_PAYMENT_DIRBANKUK_ZONE', '0', 'If a zone is selected,
         only enable this payment method for that zone.', '6', '2', 'zen_get_zone_class_title', 'zen_cfg_pull_down_zone_classes(', now())");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.',
         'MODULE_PAYMENT_DIRBANKUK_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Code', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Code',
         'MODULE_PAYMENT_DIRBANKUK_SORTCODE', '00-00-00', '6 digit sort code in the format 00-00-00', '6', '1', now());");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account No.', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account No.',
         'MODULE_PAYMENT_DIRBANKUK_ACCNUM', '12345678', 'Bank Account No.', '6', '1', now());");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account Name', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Account Name',
         'MODULE_PAYMENT_DIRBANKUK_ACCNAM', 'Joe Bloggs', 'Bank Account Name', '6', '1', now());");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Name', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Bank Name',
         'MODULE_PAYMENT_DIRBANKUK_BANKNAM', 'The Bank', 'Bank Name', '6', '1', now());");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Swift or BIC Code.', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Swift or BIC Code.',
         'MODULE_PAYMENT_DIRBANKUK_SWIFT', '12345678', 'Swift Code.', '6', '1', now());");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
-        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('IBAN Number.', 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
+        configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('IBAN Number.',
         'MODULE_PAYMENT_DIRBANKUK_IBAN', 'GB82 WEST 1234 5698 7654 32', 'Swift Code.', '28', '1', now());");
-      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, 
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key,
         configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function,
-         date_added) values ('Set Order Status', 'MODULE_PAYMENT_DIRBANKUK_ORDER_STATUS_ID', '0', 
-         'Set the status of orders made with this payment module to this value', '6', '0', 'zen_cfg_pull_down_order_statuses(', 
+         date_added) values ('Set Order Status', 'MODULE_PAYMENT_DIRBANKUK_ORDER_STATUS_ID', '0',
+         'Set the status of orders made with this payment module to this value', '6', '0', 'zen_cfg_pull_down_order_statuses(',
          'zen_get_order_status_name', now())");
    }
 
