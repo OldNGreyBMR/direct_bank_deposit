@@ -1,8 +1,0 @@
-# Build and Release Folders
-*.bak
-*.php2
-\nppBackup
-dev-*
-*.php2
-*.zip
-*.log
