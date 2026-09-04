@@ -1,7 +1,8 @@
 # direct_bank_deposit
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
- 
+
+ ## 2026-09-05 V2.1.2 restructured to make "one canonical install root"
 2026-01-10 V2.1.2  
 Updated 2026-02-14
 # Plugin Installler for Zen Cart v2.2.0 and PHP 8.3 to 8.4
