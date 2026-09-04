@@ -1,15 +1,20 @@
 # direct_bank_deposit
 
 ## Direct Bank Deposit Australia (AUS), Canada (CA), New Zealand (NZ), United Kingdom (UK), United States (USA), South Africa (ZA)
- 
-2026-04-06 V2.1.2a
-# For Zen Cart v2.1.0, v2.2.0, v2.2.1, v2.2.0 and PHP 8.3 to 8.4
+
+2026-09-04 V2.1.3
+# For Zen Cart v2.1.0 to v2.3.0 and PHP 8.3 to 8.5
+This release intergrates with One Page Checkout (OPC) to display banking details on the Checkout page in the "Bottom Instructions" box.
+
+
+2026-02-27 V2.1.2a
+# For Zen Cart v2.1.0 and PHP 8.3 to 8.
 Create zc_plugins folder installer for AU, CA, NZ, UK, USA, ZA
 
 Plugin is NOT FOR zc versions before ZC2.1.0
 ----------------------------------
 For ZC Version 1.5.8 and 2.0.0 specific instructions are included
-2026-04-06 v2.1.2a constants defined using ternary operator
+
 2026-02-27 V2.1.2a corrected type in UK version language file. Checked all language files.
 
 2025-12-20 V2.1.2
